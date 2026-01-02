@@ -129,8 +129,90 @@ This design ensures:
 - PostgreSQL
 - Docker & Docker Compose
 
-### Environment Setup (Demo Only)
+#### Server Environment
 
-**Client**
+Create a `.env` file in the `server` directory:
+
+**On Local:**
 ```env
-VITE_API_URL=http://localhost:5000/api
+# Server
+HOST=localhost:5173
+PORT=5000
+
+# Local PostgreSQL Database
+DB_HOST=database
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=postgres
+DB_NAME=request_model_test
+
+# JWT Configs
+JWT_SECRET=jipjipmoneydata_secret
+
+# Environment for changing database
+NODE_ENV=development
+```
+
+**3. Build and run with Docker Compose:**
+
+```bash
+# Development mode
+docker-compose -f docker-compose.dev.yml up --build
+
+# Production mode
+docker-compose -f docker-compose.prd.yml up --build
+```
+
+**The application will be available at:**
+- **Client:** `http://localhost:5173`
+- **Server:** `http://localhost:5001`
+
+---
+
+## 📁 Project Structure
+
+```
+JJM_Admin/
+├── client/                 # Frontend React application
+│   ├── src/
+│   │   ├── api/           # API integration
+│   │   ├── components/    # Reusable components
+│   │   ├── context/       # React context providers
+│   │   ├── hooks/         # Custom React hooks
+│   │   ├── icons/         # Icon assets
+│   │   ├── layout/        # Layout components
+│   │   ├── pages/         # Page components
+│   │   └── lib/           # Utility libraries
+│   └── package.json
+│
+├── server/                # Backend Node.js application
+│   ├── src/
+│   │   ├── configs/       # Configuration files
+│   │   ├── controllers/   # Route controllers
+│   │   ├── middleware/    # Custom middleware
+│   │   ├── routes/        # API routes
+│   │   ├── services/      # Business logic
+│   │   └── utils/         # Utility functions
+│   └── package.json
+│
+├── docker-compose.dev.yml
+├── docker-compose.prd.yml
+└── README.md
+```
+
+---
+
+## 🔒 Security Features
+
+- JWT-based authentication with secure token storage
+- Password hashing with bcrypt
+- Helmet middleware for HTTP security headers
+- CORS configuration for API protection
+- Environment variable management for sensitive data
+
+---
+
+## 🙋‍♂️ Contact
+
+Developed by **Supakun Thata**
+📧 Email: supakun@gmail.com
